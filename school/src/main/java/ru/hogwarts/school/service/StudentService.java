@@ -20,11 +20,14 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
-    public Student editStudent(Student student) {
-        return studentRepository.save(student);
+    public Student editStudent(Long id, Student student) {
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+        existingStudent.setName(student.getName());
+        existingStudent.setAge(student.getAge());
+        return studentRepository.save(existingStudent);
     }
 
     public void deleteStudent(long id) {

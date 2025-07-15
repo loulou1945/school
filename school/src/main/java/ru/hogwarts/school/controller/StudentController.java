@@ -12,7 +12,6 @@ import java.util.Collection;
 @RequestMapping("student")
 public class StudentController {
 
-    @Autowired
     private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
@@ -33,9 +32,9 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
-    @PutMapping
-    public ResponseEntity<Student> editStudent(@RequestBody Student student) {
-        Student foundStudent = studentService.editStudent(student);
+    @PutMapping("{id}")
+    public ResponseEntity<Student> editStudent(@PathVariable Long id, @RequestBody Student student) {
+        Student foundStudent = studentService.editStudent(id, student);
         if (foundStudent == null) {
             return ResponseEntity.notFound().build();
         }
