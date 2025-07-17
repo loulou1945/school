@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -31,9 +32,9 @@ public class FacultyController {
         return facultyService.createFaculty(faculty);
     }
 
-    @PutMapping
-    public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
-        Faculty foundFaculty = facultyService.editFaculty(faculty);
+    @PutMapping("{id}")
+    public ResponseEntity<Faculty> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
+        Faculty foundFaculty = facultyService.editFaculty(id, faculty);
         if (foundFaculty == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,8 +42,9 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable Long id) {
-        return facultyService.deleteFaculty(id);
+    public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("color/{color}")
