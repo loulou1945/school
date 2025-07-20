@@ -66,6 +66,6 @@ public class StudentController {
         if (foundStudent == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(studentService.findStudent(id).getFaculty());
+        return ResponseEntity.ok(foundStudent.getFaculty());
     }
 }
