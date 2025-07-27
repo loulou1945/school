@@ -1,26 +1,30 @@
 package ru.hogwarts.school.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Faculty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
     private String color;
 
     @OneToMany(mappedBy = "faculty")
-    private Collection<Student> student;
+    private Set<Student> student;
 
     public Collection<Student> getStudents() {
         return student;
+    }
+
+    public void setStudents(Set<Student> student) {
+        this.student = student;
     }
 
     @Override
