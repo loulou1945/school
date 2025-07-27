@@ -1,10 +1,10 @@
 package ru.hogwarts.school.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Faculty {
@@ -66,5 +66,9 @@ public class Faculty {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public void setStudent(Set<Student> student) {
+        this.student = student;
     }
 }
