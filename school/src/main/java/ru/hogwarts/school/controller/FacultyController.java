@@ -9,8 +9,10 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("faculty")
@@ -52,11 +54,11 @@ public class FacultyController {
     }
 
     @GetMapping("color-or-name")
-    public ResponseEntity<Collection<Faculty>> findByColorOrName(@RequestParam String color, @RequestParam String name) {
-        if (color != null && !color.isBlank() && name != null && !name.isBlank()) {
-            return ResponseEntity.ok(facultyService.findFacultyByColorOrName(color, name));
+    public Collection<Faculty> findByColorOrName(@RequestParam String color, @RequestParam String name) {
+        if (!color.isBlank() && !name.isBlank()) {
+            return facultyService.findFacultyByColorOrName(color, name);
         }
-        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
+        return new ArrayList<>();
     }
 
     @GetMapping("{id}/student")
