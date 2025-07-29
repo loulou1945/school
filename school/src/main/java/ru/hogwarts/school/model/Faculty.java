@@ -71,4 +71,8 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public void setStudent(Set<Student> student) {
+        this.student = student;
+    }
 }
