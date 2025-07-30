@@ -72,8 +72,4 @@ public class Student {
                 ", age=" + age +
                 '}';
     }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
 }
