@@ -88,7 +88,10 @@ public class AvatarService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public List<Avatar> getAllAvatars(Integer pageNumber, Integer pageSize) {
+    public List<Avatar> getAllAvatars(int pageNumber, int pageSize) {
+        if (pageNumber <= 0 || pageSize <=0) {
+            return null;
+        }
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }

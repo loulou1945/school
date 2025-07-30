@@ -21,9 +21,12 @@ public class AvatarTController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Avatar>> getAllAvatars(@RequestParam("page") Integer pageNumber,
-                                                      @RequestParam("size") Integer pageSize) {
+    public ResponseEntity<List<Avatar>> getAllAvatars(@RequestParam("page") int pageNumber,
+                                                      @RequestParam("size") int pageSize) {
         List<Avatar> avatars = avatarService.getAllAvatars(pageNumber, pageSize);
+        if (avatars == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(avatars);
     }
 }
