@@ -7,6 +7,8 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repositories.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 @Service
 public class FacultyService {
@@ -45,6 +47,24 @@ public class FacultyService {
     public Collection<Faculty> findFacultyByColorOrName(String color, String name) {
         logger.info("Was invoked method for find faculty by color or name");
         return facultyRepository.findByColorIgnoreCaseOrNameIgnoreCase(color, name);
+    }
+
+    public String findLoggestFacultyName() {
+        logger.info("Was invoked method for find loggest faculty name");
+
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .get();
+    }
+
+    public Integer getSmthIdk() {
+        logger.info("Was invoked method for get smth idk");
+
+        return Stream.iterate(1, a -> a + 1)
+                .limit(1_000_000)
+                .parallel()
+                .reduce(0, Integer::sum);
     }
 
 }
