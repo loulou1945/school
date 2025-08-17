@@ -75,7 +75,7 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.findLoggestFacultyName());
     }
 
-    @GetMapping("get-smth-idk")
+    @GetMapping("smth-idk")
     public ResponseEntity<Integer> getSmthIdk() {
         return ResponseEntity.ok(facultyService.getSmthIdk());
     }
