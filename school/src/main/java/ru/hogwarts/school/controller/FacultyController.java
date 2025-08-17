@@ -69,4 +69,14 @@ public class FacultyController {
         }
         return ResponseEntity.ok(foundFaculty.getStudents());
     }
+
+    @GetMapping("loggest-faculty-name")
+    public ResponseEntity<String> findLoggestFacultyName() {
+        return ResponseEntity.ok(facultyService.findLoggestFacultyName());
+    }
+
+    @GetMapping("smth-idk")
+    public ResponseEntity<Integer> getSmthIdk() {
+        return ResponseEntity.ok(facultyService.getSmthIdk());
+    }
 }
