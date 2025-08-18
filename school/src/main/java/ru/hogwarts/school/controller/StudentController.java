@@ -97,11 +97,13 @@ public class StudentController {
 
     @GetMapping("print-parallel")
     public ResponseEntity<Void> printNameParallel() {
-        return ResponseEntity.ok(studentService.printNameParallel());
+        studentService.printNameParallel();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("print-synchronized")
     public ResponseEntity<Void> printNameSynchronized() {
-        return ResponseEntity.ok(studentService.printNameSynchronized());
+        studentService.printNameSynchronized();
+        return ResponseEntity.ok().build();
     }
 }
