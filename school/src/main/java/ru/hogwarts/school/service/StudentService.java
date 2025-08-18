@@ -88,5 +88,46 @@ public class StudentService {
                 .collect(Collectors.averagingDouble(Student::getAge));
     }
 
+    public void printNameParallel() {
+        logger.info("Was invoked parallel method for print students' names");
 
+        List<Student> studentList = studentRepository.findAll();
+
+        System.out.println(studentList.get(0).getName());
+        System.out.println(studentList.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println(studentList.get(2).getName());
+            System.out.println(studentList.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(studentList.get(4).getName());
+            System.out.println(studentList.get(5).getName());
+        }).start();
+    }
+
+
+    public void printNameSynchronized() {
+        logger.info("Was invoked synchronized method for print students' names");
+
+        List<Student> studentList = studentRepository.findAll();
+
+        printName(studentList, 0);
+        printName(studentList, 1);
+
+        new Thread(() -> {
+            printName(studentList, 2);
+            printName(studentList, 3);
+        }).start();
+
+        new Thread(() -> {
+            printName(studentList, 4);
+            printName(studentList, 5);
+        }).start();
+    }
+
+    private synchronized void printName(List<Student> students, int i) {
+        System.out.println(students.get(i).getName());
+    }
 }
